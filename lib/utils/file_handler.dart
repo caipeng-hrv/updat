@@ -8,8 +8,7 @@ import 'package:http/http.dart' as http;
 
 import 'open_link.dart';
 
-Future<File> getDownloadFileLocation(
-    String release, String appName, String extension) async {
+Future<File> getDownloadFileLocation(String release, String appName, String extension) async {
   final downloadDir = await getDownloadsDirectory();
   if (downloadDir == null) {
     throw Exception('Unable to get downloads directory');
@@ -22,18 +21,22 @@ Future<File> getDownloadFileLocation(
 }
 
 Future<File> downloadRelease(File file, String url) async {
-  var res = await http.get(
-    Uri.parse(url),
-  );
-  if (res.statusCode == 200) {
-    await file.writeAsBytes(res.bodyBytes);
-    // Return with new installed status
+  if (file.existsSync()) {
     return file;
   } else {
-    throw Exception(
-      'There was an issue downloading the file, plese try again later.\n'
-      'Code ${res.statusCode}',
+    var res = await http.get(
+      Uri.parse(url),
     );
+    if (res.statusCode == 200) {
+      await file.writeAsBytes(res.bodyBytes);
+      // Return with new installed status
+      return file;
+    } else {
+      throw Exception(
+        'There was an issue downloading the file, plese try again later.\n'
+        'Code ${res.statusCode}',
+      );
+    }
   }
 }
 

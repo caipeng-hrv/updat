@@ -13,8 +13,7 @@ Widget floatingExtendedChipWithSilentDownload({
   required Future<void> Function() launchInstaller,
   required void Function() dismissUpdate,
 }) {
-  if (UpdatStatus.available == status ||
-      UpdatStatus.availableWithChangelog == status) {
+  if (UpdatStatus.available == status || UpdatStatus.availableWithChangelog == status) {
     startUpdate();
   }
 
@@ -26,24 +25,15 @@ Widget floatingExtendedChipWithSilentDownload({
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(height: 8),
             Text(
-              "Update Ready",
-              style: Theme.of(context).textTheme.titleMedium,
+              "当前的版本 v$appVersion.",
+              style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 8),
             Text(
-              "Version ${latestVersion.toString()} is now ready to be installed!",
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              "You are currently running version $appVersion.",
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              "Update now to get the latest features and fixes.",
-              style: Theme.of(context).textTheme.bodyMedium,
+              "发现新版本 v${latestVersion.toString()}",
+              style: Theme.of(context).textTheme.bodySmall,
             ),
             const SizedBox(height: 15),
             Row(
@@ -52,13 +42,13 @@ Widget floatingExtendedChipWithSilentDownload({
               children: [
                 TextButton(
                   onPressed: dismissUpdate,
-                  child: const Text('Later'),
+                  child: const Text('稍后更新'),
                 ),
                 const SizedBox(width: 10),
-                ElevatedButton.icon(
+                TextButton(
                   onPressed: startUpdate,
-                  icon: const Icon(Icons.install_desktop_rounded),
-                  label: const Text('Install Now'),
+                  // icon: const Icon(Icons.install_mobile),
+                  child: const Text('立即更新'),
                 ),
               ],
             ),
