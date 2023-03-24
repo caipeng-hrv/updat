@@ -92,8 +92,7 @@ class UpdatWindowManager extends StatefulWidget {
   State<UpdatWindowManager> createState() => _UpdatWindowManagerState();
 }
 
-class _UpdatWindowManagerState extends State<UpdatWindowManager>
-    with WindowListener {
+class _UpdatWindowManagerState extends State<UpdatWindowManager> with WindowListener {
   @override
   void initState() {
     windowManager.addListener(this);
@@ -126,9 +125,9 @@ class _UpdatWindowManagerState extends State<UpdatWindowManager>
     return Stack(
       children: [
         Positioned.fill(child: widget.child),
-        Positioned(
-          right: 10,
-          bottom: 10,
+        Center(
+          // right: 10,
+          // bottom: 10,
           child: UpdatWidget(
             updateChipBuilder: passthroughChip,
             updateDialogBuilder: widget.updateDialogBuilder,
